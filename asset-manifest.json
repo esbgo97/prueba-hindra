@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/prueba-hindra/static/css/main.d1b05096.chunk.css",
+    "main.js": "/prueba-hindra/static/js/main.292abca3.chunk.js",
+    "main.js.map": "/prueba-hindra/static/js/main.292abca3.chunk.js.map",
+    "runtime-main.js": "/prueba-hindra/static/js/runtime-main.eeda3c33.js",
+    "runtime-main.js.map": "/prueba-hindra/static/js/runtime-main.eeda3c33.js.map",
+    "static/js/2.bdabcaa0.chunk.js": "/prueba-hindra/static/js/2.bdabcaa0.chunk.js",
+    "static/js/2.bdabcaa0.chunk.js.map": "/prueba-hindra/static/js/2.bdabcaa0.chunk.js.map",
+    "index.html": "/prueba-hindra/index.html",
+    "precache-manifest.5efc31695e2ab3ba977cdfb986fb5d2c.js": "/prueba-hindra/precache-manifest.5efc31695e2ab3ba977cdfb986fb5d2c.js",
+    "service-worker.js": "/prueba-hindra/service-worker.js",
+    "static/css/main.d1b05096.chunk.css.map": "/prueba-hindra/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.bdabcaa0.chunk.js.LICENSE.txt": "/prueba-hindra/static/js/2.bdabcaa0.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.eeda3c33.js",
+    "static/js/2.bdabcaa0.chunk.js",
+    "static/css/main.d1b05096.chunk.css",
+    "static/js/main.292abca3.chunk.js"
+  ]
+}
