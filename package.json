@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://esbgo97.github.io/prueba-hindra",
   "dependencies": {
+    "@ant-design/icons": "^4.0.5",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -14,6 +15,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-router": "^5.1.4",
     "@types/react-router-dom": "^5.1.3",
+    "antd": "^4.1.0",
     "firebase": "^7.11.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",

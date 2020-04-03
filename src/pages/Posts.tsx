@@ -1,6 +1,8 @@
-import React, { Component, useCallback } from 'react'
+import React, { Component } from 'react'
 import Firebase from '../infrastructure/Firebase'
-
+import AppTemplate from '../ui/partials/AppTemplate';
+import { Row, Col, Button, Card, Form, Input, List, Avatar } from 'antd';
+import { } from '@ant-design/icons'
 
 class Post extends Component<any, any> {
     db: any = null;
@@ -8,7 +10,8 @@ class Post extends Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state = {
-            posts: []
+            posts: [],
+            alert: { type: "info", message: "", show: false }
         }
         this.db = Firebase.database().ref().child('Post');
     }
@@ -23,51 +26,81 @@ class Post extends Component<any, any> {
             this.setState({ posts })
         })
     }
-    handleSubmit = async (ev: any) => {
-        ev.preventDefault();
-        const { name, text } = ev.target.elements;
-        try {
-            const post = {
-                text: text.value,
-                name: name.value,
-                user: Firebase.auth().currentUser?.uid || ""
-            };
-            await this.db.push().set(post)
-        } catch (err) {
-            alert(err)
-        }
+    handleSubmit = (formData: any) => {
+        const post = {
+            user: Firebase.auth().currentUser?.uid || "",
+            ...formData
+        };
+        this.db.push().set(post).then((resp: any) => {
+            this.setState({
+                alert: {
+                    show: true,
+                    type: "info",
+                    message: "Adde Posts"
+                }
+            })
+        }).catch((err: Error) => {
+            this.setState({
+                alert: {
+                    show: true,
+                    type: "error",
+                    message: err.message
+                }
+            })
+        })
     }
 
     render() {
 
 
         return (
-            <div>
-                <h1>Post</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Nombre:
-                    <input name="name" type="text" />
-                    </label>
-                    <br />
-                    <label>
-                        Contenido:
-                    <input name="text" type="text" />
-                    </label>
+            <AppTemplate title="Post Page" alertProps={this.state.alert}>
+                <Row gutter={[16, 16]} >
+                    <Col span={6}>
+                        <Card title="Publish new Post">
+                            <Form onFinish={this.handleSubmit}>
+                                <Form.Item name="name" rules={[{ required: true, message: "Ingrese un nombre" }]}>
+                                    <Input placeholder="Nombre" />
+                                </Form.Item>
 
-                    <br />
-                    <button type="submit">
-                        Publicar
-                </button>
-                </form>
+                                <Form.Item name="text" rules={[{ required: true, message: "Ingrese un nombre" }]}>
+                                    <Input placeholder="Contenido" />
+                                </Form.Item>
 
+                                <Form.Item>
+                                    <Button type="primary" htmlType="submit" >Publicar</Button>
+                                </Form.Item>
+
+                            </Form>
+
+                        </Card>
+
+                    </Col>
+                    <Col  span={12}>
+                        <Card >
+                            <List itemLayout="horizontal"
+                                dataSource={this.state.posts}
+                                renderItem={(post: any) => (<List.Item>
+                                    <List.Item.Meta
+                                        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                                        title={post.name}
+                                        description={post.text}
+                                    />
+                                </List.Item>)}
+                            />
+                        </Card>
+
+                    </Col>
+                    <Col span={6}>
+                        <Card title="Users">
+
+                        </Card>
+                    </Col>
+                </Row>
                 <br />
-                <ul>
-                    {this.state.posts.map((p: any, k: number) => 
-                    <li key={k}><b>{p.name}:</b> - {p.text} - {p.user}</li>)}
-                </ul>
-                <button onClick={() => { Firebase.auth().signOut() }}>Salir</button>
-            </div>
+
+                <Button type="primary" onClick={() => { Firebase.auth().signOut() }}>Salir</Button>
+            </AppTemplate>
 
         )
     }
